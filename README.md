@@ -33,14 +33,30 @@ npm install
 yarn install
 ```
 
-3. Ejecuta el servidor de desarrollo:
+3. Configura las variables de entorno:
+```bash
+cp .env.example .env.local
+```
+
+4. Ejecuta el servidor de desarrollo:
 ```bash
 npm run dev
 # o
 yarn dev
 ```
 
-4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
+
+## Variables de Entorno
+
+La aplicación requiere las siguientes variables de entorno:
+
+```env
+NEXT_PUBLIC_GITHUB_API_URL=https://api.github.com
+```
+
+Copia el archivo `.env.example` a `.env.local` y ajusta los valores según sea necesario:
+- `NEXT_PUBLIC_GITHUB_API_URL`: URL base de la API de GitHub (por defecto: https://api.github.com)
 
 ## Estructura del Proyecto
 

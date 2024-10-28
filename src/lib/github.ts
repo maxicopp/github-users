@@ -1,6 +1,6 @@
 import { GitHubUser } from "@/types/github";
 
-const GITHUB_API_URL = 'https://api.github.com';
+const GITHUB_API_URL = process.env.NEXT_PUBLIC_GITHUB_API_URL;
 
 export async function getUsers(): Promise<GitHubUser[]> {
     const res = await fetch(`${GITHUB_API_URL}/users`);
