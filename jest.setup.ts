@@ -2,11 +2,11 @@ import '@testing-library/jest-dom'
 import React from 'react'
 import type { StaticImageData } from 'next/image'
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      img: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
-    }
+type ImgProps = React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
+
+declare module 'react' {
+  interface IntrinsicElements {
+    img: ImgProps
   }
 }
 
@@ -33,3 +33,33 @@ jest.mock('next/link', () => ({
     return React.createElement('a', { href }, children)
   }
 }))
+
+class MockIntersectionObserver {
+  readonly root: Element | null;
+  readonly rootMargin: string;
+  readonly thresholds: ReadonlyArray<number>;
+
+  constructor() {
+    this.root = null;
+    this.rootMargin = '';
+    this.thresholds = [];
+  }
+
+  disconnect() {
+    return null;
+  }
+
+  observe() {
+    return null;
+  }
+
+  takeRecords() {
+    return [];
+  }
+
+  unobserve() {
+    return null;
+  }
+}
+
+global.IntersectionObserver = MockIntersectionObserver;

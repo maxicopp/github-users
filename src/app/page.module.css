@@ -32,6 +32,16 @@
   padding: 1rem;
 }
 
+.warning {
+  text-align: center;
+  padding: 8px 16px;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  border-radius: 8px;
+  margin: 16px;
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 16px;

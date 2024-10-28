@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
 
 type FavoritesContextType = {
   favorites: Set<number>;
@@ -8,10 +8,25 @@ type FavoritesContextType = {
   isFavorite: (userId: number) => boolean;
 };
 
+const FAVORITES_STORAGE_KEY = 'github-favorites';
+
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
 
 export function FavoritesProvider({ children }: { children: React.ReactNode }) {
-  const [favorites, setFavorites] = useState<Set<number>>(new Set());
+  const [favorites, setFavorites] = useState<Set<number>>(() => {
+    if (typeof window === 'undefined') return new Set();
+
+    try {
+      const stored = localStorage.getItem(FAVORITES_STORAGE_KEY);
+      return new Set(stored ? JSON.parse(stored) : []);
+    } catch {
+      return new Set();
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(Array.from(favorites)));
+  }, [favorites]);
 
   const toggleFavorite = useCallback((userId: number) => {
     setFavorites(prev => {

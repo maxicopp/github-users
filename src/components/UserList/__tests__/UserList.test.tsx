@@ -10,7 +10,15 @@ jest.mock('@/components/UserCard', () => ({
 
 jest.mock('react-loading-skeleton', () => ({
   __esModule: true,
-  default: function Skeleton({ circle, width, height }: any) {
+  default: function Skeleton({
+    circle,
+    width,
+    height
+  }: {
+    circle?: boolean;
+    width?: string | number;
+    height?: string | number;
+  }) {
     return (
       <div
         data-testid="skeleton"
@@ -47,20 +55,35 @@ const mockUsers: GitHubUser[] = [
 
 describe('UserList', () => {
   it('should render loading skeletons when loading is true', () => {
-    render(<UserList users={[]} loading={true} />);
+    render(<UserList
+      users={[]}
+      loading={true}
+      hasMore={false}
+      onLoadMore={() => {}}
+    />);
 
     const skeletonCards = screen.getAllByTestId('skeleton-card');
     expect(skeletonCards).toHaveLength(6);
   });
 
   it('should render empty message when no users are provided', () => {
-    render(<UserList users={[]} loading={false} />);
+    render(<UserList
+      users={[]}
+      loading={false}
+      hasMore={false}
+      onLoadMore={() => {}}
+    />);
 
     expect(screen.getByText('No se encontraron usuarios.')).toBeInTheDocument();
   });
 
   it('should render user cards for each user', () => {
-    render(<UserList users={mockUsers} loading={false} />);
+    render(<UserList
+      users={mockUsers}
+      loading={false}
+      hasMore={false}
+      onLoadMore={() => {}}
+    />);
 
     const userCards = screen.getAllByTestId('user-card');
     expect(userCards).toHaveLength(mockUsers.length);
@@ -71,21 +94,36 @@ describe('UserList', () => {
   });
 
   it('should render correct number of skeleton cards while loading', () => {
-    render(<UserList users={[]} loading={true} />);
+    render(<UserList
+      users={[]}
+      loading={true}
+      hasMore={false}
+      onLoadMore={() => {}}
+    />);
 
     const skeletons = screen.getAllByTestId('skeleton');
     expect(skeletons.length).toBeGreaterThan(0);
   });
 
   it('should not render user cards while loading', () => {
-    render(<UserList users={mockUsers} loading={true} />);
+    render(<UserList
+      users={[]}
+      loading={true}
+      hasMore={false}
+      onLoadMore={() => {}}
+    />);
 
     const userCards = screen.queryAllByTestId('user-card');
     expect(userCards).toHaveLength(0);
   });
 
   it('should render in a grid layout', () => {
-    render(<UserList users={mockUsers} loading={false} />);
+    render(<UserList
+      users={mockUsers}
+      loading={false}
+      hasMore={false}
+      onLoadMore={() => {}}
+    />);
 
     const grid = screen.getByTestId('user-grid');
     expect(grid).toHaveClass('grid');

@@ -1,5 +1,6 @@
 import { render, screen, fireEvent } from '@/test-utils';
 import { UserCard } from '../index';
+import { GitHubUser } from '@/types/github';
 
 const mockToggleFavorite = jest.fn();
 jest.mock('@/hooks/useFavorites', () => ({
@@ -9,13 +10,13 @@ jest.mock('@/hooks/useFavorites', () => ({
   }),
 }));
 
-const mockUser = {
+const mockUser: GitHubUser = {
   id: 1,
   login: 'testuser',
   avatar_url: 'https://example.com/avatar.jpg',
   html_url: 'https://github.com/testuser',
   name: 'Test User',
-  bio: null,
+  bio: undefined,
   public_repos: 10,
   followers: 20,
   following: 30,
