@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, FormEvent } from 'react';
 import styles from './styles.module.css';
 
 interface SearchBarProps {
@@ -10,13 +10,16 @@ interface SearchBarProps {
 export function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSearch(query);
+    const trimmedQuery = query.trim();
+    if (trimmedQuery) {
+      onSearch(trimmedQuery);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.searchBar}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <input
         type="text"
         value={query}
@@ -26,8 +29,8 @@ export function SearchBar({ onSearch }: SearchBarProps) {
       />
       <button
         type="submit"
-        className={styles.button}
         disabled={!query.trim()}
+        className={styles.button}
       >
         Buscar
       </button>

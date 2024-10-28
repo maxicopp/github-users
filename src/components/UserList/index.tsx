@@ -13,9 +13,9 @@ interface UserListProps {
 export function UserList({ users, loading }: UserListProps) {
   if (loading) {
     return (
-      <div className={styles.grid}>
+      <div className={styles.grid} data-testid="user-grid">
         {[...Array(6)].map((_, i) => (
-          <div key={i} className={styles.skeletonCard}>
+          <div key={i} className={styles.skeletonCard} data-testid="skeleton-card">
             <div className={styles.skeletonAvatar}>
               <Skeleton circle width={80} height={80} />
             </div>
@@ -37,7 +37,7 @@ export function UserList({ users, loading }: UserListProps) {
   }
 
   return (
-    <div className={styles.grid}>
+    <div className={styles.grid} data-testid="user-grid">
       {users.map((user) => (
         <UserCard key={user.id} user={user} />
       ))}
