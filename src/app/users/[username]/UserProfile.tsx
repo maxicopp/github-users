@@ -1,5 +1,6 @@
 'use client';
 
+import Skeleton from 'react-loading-skeleton';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useFavorites } from '@/hooks/useFavorites';
@@ -31,8 +32,37 @@ export function UserProfile({ username }: UserProfileProps) {
     loadUser();
   }, [username]);
 
-  if (isLoading) return <div className={styles.loading}>Cargando...</div>;
   if (error) return <div className={styles.error}>{error}</div>;
+
+  if (isLoading) {
+    return (
+      <div className={styles.profile}>
+        <Skeleton circle width={150} height={150} />
+        <div className={styles.info}>
+          <div className={styles.header}>
+            <h1><Skeleton width={200} /></h1>
+          </div>
+          <Skeleton count={2} style={{ marginTop: '1rem' }} />
+          <div className={styles.stats}>
+            <div className={styles.stat}>
+              <Skeleton width={80} />
+              <Skeleton width={40} />
+            </div>
+            <div className={styles.stat}>
+              <Skeleton width={80} />
+              <Skeleton width={40} />
+            </div>
+            <div className={styles.stat}>
+              <Skeleton width={80} />
+              <Skeleton width={40} />
+            </div>
+          </div>
+          <Skeleton width={120} height={40} style={{ marginTop: '2rem' }} />
+        </div>
+      </div>
+    );
+  }
+
   if (!user) return null;
 
   const favorite = isFavorite(user.id);
@@ -47,7 +77,6 @@ export function UserProfile({ username }: UserProfileProps) {
         className={styles.avatar}
         priority
       />
-
       <div className={styles.info}>
         <div className={styles.header}>
           <h1>{user.name || user.login}</h1>
@@ -60,7 +89,6 @@ export function UserProfile({ username }: UserProfileProps) {
           </button>
         </div>
         {user.bio && <p className={styles.bio}>{user.bio}</p>}
-
         <div className={styles.stats}>
           <div className={styles.stat}>
             <span className={styles.label}>Repositorios</span>
@@ -75,7 +103,6 @@ export function UserProfile({ username }: UserProfileProps) {
             <span className={styles.value}>{user.following}</span>
           </div>
         </div>
-
         <a
           href={user.html_url}
           target="_blank"

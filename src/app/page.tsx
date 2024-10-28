@@ -45,11 +45,7 @@ export default function Home() {
       <h1 className={styles.title}>Usuarios de GitHub</h1>
       <SearchBar onSearch={handleSearch} />
       {error && <div className={styles.error}>{error}</div>}
-      {loading ? (
-        <div className={styles.loading}>Cargando...</div>
-      ) : (
-        <UserList users={users} />
-      )}
+      <UserList users={users} loading={loading} />
     </main>
   );
 }

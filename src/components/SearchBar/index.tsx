@@ -24,7 +24,11 @@ export function SearchBar({ onSearch }: SearchBarProps) {
         placeholder="Buscar usuarios de GitHub..."
         className={styles.input}
       />
-      <button type="submit" className={styles.button}>
+      <button
+        type="submit"
+        className={styles.button}
+        disabled={!query.trim()}
+      >
         Buscar
       </button>
     </form>
