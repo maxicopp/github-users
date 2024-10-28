@@ -60,8 +60,11 @@ NEXT_PUBLIC_GITHUB_API_URL=https://api.github.com
 ## Scripts Disponibles
 
 ```bash
-npm run dev        # Inicia el servidor de desarrollo
-npm run build     # Construye la aplicación
-npm run start     # Inicia la aplicación en producción
-npm test         # Ejecuta los tests
+npm run dev           # Inicia el servidor de desarrollo
+npm run build        # Construye la aplicación
+npm run start        # Inicia la aplicación en producción
+npm run lint         # Ejecuta el linter
+npm test            # Ejecuta los tests
+npm run test:watch  # Ejecuta los tests en modo watch
+npm run test:coverage # Ejecuta los tests con cobertura
 ```
