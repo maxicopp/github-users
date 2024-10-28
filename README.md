@@ -22,7 +22,7 @@ Una aplicación Next.js que permite buscar y explorar usuarios de GitHub. La apl
 
 1. Clona el repositorio:
 ```bash
-git clone https://github.com/tuusuario/github-users.git
+git clone https://github.com/maxicopp/github-users.git
 cd github-users
 ```
 
